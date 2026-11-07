@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Monte Cieco · Livello 1 · La Posta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap">
+<style>
+/* ================================================================
+   LIVELLO 1 · LA POSTA
+   Pelle grafica: console di analisi — grafite, griglia tecnica,
+   accento acido, monospace. Meccaniche invariate.
+   ================================================================ */
+:root{
+ color-scheme:dark;
+ --bg:#07090c;--bg2:#0d1218;
+ --panel:#0f151c;--panel2:#131b24;--panel3:#18222c;
+ --line:#212c38;--line2:#2d3c4b;
+ --tx:#dde7f0;--tx2:#8fa1b3;--tx3:#63737f;
+ --lime:#c6f24e;--cyan:#4ea8ff;--mint:#3fe0a4;--red:#ff5d63;--amber:#ffb020;
+ --display:"Space Grotesk",system-ui,sans-serif;
+ --mono:"JetBrains Mono","Courier New",monospace;
+ --body:"Inter",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html,body{margin:0;min-height:100%;color:var(--tx);font-family:var(--body);font-size:15.5px;line-height:1.6}
+body{
+ background:
+  radial-gradient(900px 420px at 50% -8%,#16232e 0,transparent 65%),
+  radial-gradient(700px 360px at 100% 0%,#101d26 0,transparent 60%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 32px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 32px),
+  var(--bg);
+ background-attachment:scroll}
+body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opacity:.5;
+ background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px)}
+main{position:relative;z-index:1;max-width:940px;margin:0 auto;padding:16px 16px 44px}
+::selection{background:var(--lime);color:#0a1004}
+
+/* --- testata HUD --- */
+header{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 0 16px}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+ background:linear-gradient(90deg,transparent,#c6f24e66 32%,#4ea8ff66 68%,transparent)}
+header::before{content:"";position:absolute;left:0;bottom:0;height:1px;width:140px;z-index:1;
+ background:linear-gradient(90deg,transparent,var(--lime),transparent);animation:scan 7s linear infinite}
+@keyframes scan{0%{transform:translateX(-160px);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translateX(1000px);opacity:0}}
+.logo{font-family:var(--mono);font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--tx);text-shadow:0 0 14px #c6f24e2e}
+.logo small{font-family:var(--mono);letter-spacing:.1em;color:var(--tx3)}
+.slots{display:flex;gap:6px}
+.slots i{width:16px;height:16px;border:1px solid var(--line2);border-radius:2px;background:#0a0f14;box-shadow:inset 0 0 8px #000}
+
+/* --- pannelli --- */
+.card{position:relative;background:linear-gradient(180deg,#111821,#0b1117);border:1px solid var(--line);border-radius:3px;
+ padding:24px;margin-top:18px;box-shadow:0 30px 70px #000000a6,inset 0 1px 0 #ffffff0a}
+.card::before,.card::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--lime);opacity:.55;pointer-events:none}
+.card::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.card::after{right:-1px;bottom:-1px;border-left:0;border-top:0}
+#intro{overflow:hidden;background-image:radial-gradient(#c6f24e14 1px,transparent 1px),linear-gradient(180deg,#111821,#0b1117);background-size:20px 20px,auto}
+
+h1{display:flex;flex-wrap:wrap;align-items:center;gap:.5em;font-family:var(--display);font-weight:700;font-size:1.9rem;line-height:1.15;
+ letter-spacing:.01em;text-transform:uppercase;margin:0 0 18px;color:#fff}
+h1::before{content:"";flex:0 0 auto;width:.4em;height:.78em;background:var(--lime);box-shadow:0 0 18px #c6f24e70;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
+h2{font-family:var(--display);font-weight:600;font-size:1.26rem;letter-spacing:.045em;text-transform:uppercase;color:var(--tx);
+ margin:0 0 10px;padding-left:12px;border-left:3px solid var(--lime)}
+p{line-height:1.62;margin:.55em 0}
+b,strong{color:#fff}
+.dim{color:var(--tx2)}
+main>p.dim{font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;color:var(--tx3);text-align:center;margin-top:18px}
+.env{display:inline-block;color:var(--lime);animation:fly 3s ease-in-out infinite}
+@keyframes fly{50%{transform:translate(7px,-5px) rotate(7deg)}}
+
+/* --- messaggi di sistema in stile log --- */
+.msgs p{font-family:var(--mono);font-size:.8rem;color:#a9f0c9;background:#08120f;border:1px solid #123024;
+ border-left:2px solid var(--mint);border-radius:2px;padding:8px 11px;margin:8px 0;animation:in .45s}
+@keyframes in{from{opacity:0;transform:translateX(-10px)}}
+
+/* --- pulsanti --- */
+button,.btn{font-family:var(--mono);font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+ background:var(--lime);color:#0a1004;border:0;border-radius:2px;padding:13px 20px;cursor:pointer;text-decoration:none;display:inline-block;
+ box-shadow:0 0 0 1px #c6f24e33,0 10px 26px #c6f24e1c;transition:transform .14s,box-shadow .14s,background .14s}
+button:hover,.btn:hover{background:#d8ff74;transform:translateY(-1px);box-shadow:0 0 0 1px #c6f24e66,0 14px 34px #c6f24e38}
+button:disabled{opacity:.28;pointer-events:none}
+button.ghost{background:transparent;color:var(--tx2);border:1px solid var(--line2);box-shadow:none}
+button.ghost:hover{color:var(--lime);border-color:#c6f24e66;box-shadow:0 0 20px #c6f24e1f;transform:none}
+.hidden{display:none!important}
+
+/* --- elenco: righe di terminale --- */
+.grid{display:grid;grid-template-columns:252px 1fr;gap:16px;margin-top:14px}
+@media(max-width:680px){.grid{grid-template-columns:1fr}}
+.it{display:grid;grid-template-columns:22px 1fr 16px;gap:0 8px;width:100%;text-align:left;font-family:var(--body);font-weight:500;
+ font-size:.97rem;letter-spacing:0;text-transform:none;background:var(--panel2);color:var(--tx);border:1px solid var(--line);
+ border-left:3px solid var(--line2);border-radius:2px;margin-bottom:6px;padding:10px 11px;box-shadow:none;
+ transition:border-color .15s,background .15s,transform .15s}
+.it:hover{background:var(--panel3);border-left-color:#c6f24e77;transform:translateX(2px)}
+.it b{font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.01em}
+.it small{grid-column:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--tx3);
+ overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.it i{font-style:normal;font-size:.78rem;color:var(--mint)}
+.it.on{border-left-color:var(--lime);background:#16212b;box-shadow:inset 0 0 0 1px #c6f24e2e,0 0 26px #c6f24e12}
+.it.ok{opacity:.5}
+.it.new span{animation:pu 1.6s infinite}
+@keyframes pu{50%{transform:scale(1.25)}}
+
+/* --- email / sms --- */
+.mail,.sms{color:var(--tx);padding:18px;border-radius:3px;box-shadow:0 16px 36px #00000073,inset 0 1px 0 #ffffff07}
+.mail{position:relative;padding-top:27px;background:var(--panel2);border:1px solid var(--line2)}
+.mail::before{content:"";position:absolute;top:11px;left:14px;width:26px;height:6px;
+ background:radial-gradient(circle,#ff5d63aa 2px,transparent 2.6px) 0 50%/9px 6px repeat-x}
+.sms{background:linear-gradient(180deg,#16212b,#111a22);border:1px solid var(--line2);border-radius:3px 14px 14px 14px;max-width:400px}
+.mh{font-family:var(--mono);font-size:.71rem;letter-spacing:.05em;color:var(--tx2);
+ border-bottom:1px dashed var(--line);padding-bottom:9px;margin-bottom:11px}
+.subj{font-family:var(--mono);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:11px}
+.mail p,.sms p{font-family:var(--mono);font-size:.89rem;line-height:1.75;color:#c6d3e0}
+
+/* --- parti cliccabili --- */
+.seg{cursor:pointer;border-radius:2px;padding:1px 0;transition:background .14s,box-shadow .14s;
+ -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.seg:hover{background:#c6f24e14}
+.seg.f{background:#c6f24e1c;outline:1px solid #c6f24eaa;box-shadow:0 0 16px #c6f24e33;color:#e9ffb8}
+.lk{color:var(--cyan);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.sb{font-family:var(--mono);font-size:.75rem;background:#060a0d;color:var(--lime);border:1px solid var(--line);
+ border-left:3px solid var(--cyan);border-radius:2px;padding:8px 10px;margin-top:11px;min-height:2em;overflow-wrap:anywhere}
+
+/* --- riscontri --- */
+.fb{margin-top:14px;padding:14px 16px;border-radius:2px;background:#0f1822;border:1px solid var(--line);
+ border-left:3px solid var(--cyan);color:var(--tx);font-size:.95rem;line-height:1.62}
+.fb.g{background:#0c1a15;border-color:#1c3a2c;border-left-color:var(--mint)}
+.fb.b{background:#1a1013;border-color:#3a1c22;border-left-color:var(--red)}
+.fb a{color:var(--cyan)}
+.row{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+label.op{display:block;background:var(--panel2);border:1px solid var(--line);border-radius:2px;padding:12px 14px;margin:7px 0;
+ cursor:pointer;transition:border-color .14s,background .14s,transform .14s}
+label.op:hover{border-color:#c6f24e55;background:var(--panel3);transform:translateX(2px)}
+.op.right{border-color:var(--mint);background:#0c1a15;box-shadow:inset 0 0 0 1px #3fe0a433}
+.op.wrong{border-color:var(--red);background:#1a1013;opacity:.85}
+
+/* --- codice, lezione, avanzamento --- */
+.code{font-family:var(--mono);font-weight:700;font-size:1.5rem;letter-spacing:.22em;text-indent:.22em;color:var(--lime);
+ background:#070c09;border:1px solid #2a3a22;border-radius:2px;padding:16px;text-align:center;margin:16px 0;
+ box-shadow:inset 0 0 50px #c6f24e12,0 0 30px #c6f24e0d;text-shadow:0 0 18px #c6f24e55}
+ul{padding-left:1.15em}li{margin:.55em 0;line-height:1.6}
+.src{font-family:var(--mono);font-size:.71rem;color:var(--tx3);border-top:1px dashed var(--line);margin-top:16px;padding-top:10px}
+#goq{position:sticky;top:10px;z-index:5;box-shadow:0 18px 40px #000000a6}
+.bar{height:6px;background:#0a0f14;border:1px solid var(--line);border-radius:2px;margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#7bdc22,var(--lime));box-shadow:0 0 16px #c6f24e88;transition:width .4s}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<main>
+<header><div class="logo">◉ OSSERVATORIO DI MONTE CIECO <small style="opacity:.5">· v11</small></div><div class="slots" title="Frammenti della chiave"><i></i><i></i><i></i><i></i><i></i></div></header>
+
+<section id="intro" class="card">
+ <h1><span class="env">✉</span> LIVELLO 1 · LA POSTA</h1>
+ <div class="msgs" id="chat"></div>
+ <button id="start" class="hidden">Apri la casella di Elia →</button>
+</section>
+
+<section id="game" class="card hidden">
+ <h2>La posta di Elia</h2>
+ <p class="dim">Sul computer e sul telefono di Elia ci sono 7 messaggi. Alcuni sono veri, altri sono trappole. <b>Clicca sulle parti che ti sembrano sospette</b> (si evidenziano), poi decidi: truffa o sicuro. Passa il mouse (o tocca) sui link per vedere dove portano davvero.</p>
+ <div class="bar"><i id="pr" style="width:0"></i></div>
+ <div id="goq" class="fb g hidden">✔ Hai controllato tutti i messaggi! <button id="cont" style="margin-left:8px">Vai alla prossima prova →</button></div>
+ <div class="grid"><div id="list"></div><div id="rd"></div></div>
+</section>
+
+<section id="cat" class="card hidden">
+ <h2>Il museo delle truffe</h2>
+ <p class="dim">Hai visto 7 messaggi, ma le truffe informatiche hanno nomi e categorie diverse. Prima impari le 7 più note, una per volta. Poi ti metto alla prova con 7 casi per verificare di aver capito.</p>
+ <div id="cs"></div>
+</section>
+<section id="q2" class="card hidden">
+ <h2>Dalla teoria alla pratica</h2>
+ <p class="dim">Riconoscere una truffa è metà del lavoro. L'altra metà è sapere cosa fare quando ti capita davvero. Tre situazioni: scegli la risposta e leggi sempre la spiegazione.</p>
+ <div id="qs"></div>
+</section>
+
+<section id="lesson" class="card hidden">
+ <h1>✔ POSTA IN ORDINE</h1>
+ <h2>Cosa hai imparato</h2>
+ <ul>
+  <li><b>Controlla il mittente.</b> Il dominio dopo la @ deve essere quello ufficiale, senza trattini o parole aggiunte (<i>poste.it</i> sì, <i>posteitaliane-sicurezza.com</i> no).</li>
+  <li><b>Diffida della fretta.</b> Blocchi in 24 ore, scadenze, premi: servono a non farti pensare.</li>
+  <li><b>Guarda il link prima di cliccare.</b> L'indirizzo vero si vede passandoci sopra; i link abbreviati nascondono la destinazione.</li>
+  <li><b>Nessun ente serio ti chiede password, codici o dati della carta</b> per email o SMS. Mai comunicare un codice ricevuto, nemmeno a chi sembra un conoscente.</li>
+  <li><b>Il canale cambia, il meccanismo no.</b> Email, SMS, voce, QR code o chat: phishing, smishing, vishing, quishing, truffa del CEO o del falso familiare usano sempre fiducia, fretta e una richiesta da eseguire subito.</li>
+  <li><b>Se hai già cliccato:</b> cambia la password, attiva la verifica a due fattori, avvisa e segnala.</li>
+ </ul>
+ <div class="src">Per approfondire: CERT-AgID (cert-agid.gov.it, campagne reali in Italia), Polizia Postale (commissariatodips.it), ACN (acn.gov.it).</div>
+ <p>Il tuo codice di sblocco per la serratura:</p>
+ <div class="code">POSTA-1</div>
+ <a class="btn" id="lock" href="#" target="_blank" rel="noopener">Apri la serratura →</a>
+ <p id="warn" class="dim hidden">(Link del Modulo non ancora inserito)</p>
+</section>
+<p class="dim" style="font-size:.7rem;text-align:center">Livello 1 · versione 11 · stile «Console»</p>
+</main>
+
+<script>
+// ====== DA MODIFICARE: link del Google Modulo del Livello 1 ======
+const FORM_URL = "https://forms.gle/bkHhbp4DLvzVD8vG6";
+// =================================================================
+const $=id=>document.getElementById(id);
+const S=(t,c,u)=>({t,c,u});
+const W={
+ Mittente:"<b>Mittente:</b> il dominio (o il numero) non è quello ufficiale. Gli enti veri usano il proprio dominio, senza trattini o parole aggiunte.",
+ Urgenza:"<b>Urgenza:</b> la fretta ti toglie il tempo di controllare. Gli enti seri non minacciano blocchi nel giro di poche ore.",
+ Link:"<b>Link:</b> l'indirizzo vero non appartiene all'ente (o è abbreviato per nasconderlo). Si controlla passandoci sopra, senza cliccare.",
+ Richiesta:"<b>Richiesta sospetta:</b> nessun ente serio chiede password, codici o dati della carta per email o SMS."
+};
+const M=[
+ {ico:"✉",name:"Poste Italiane",sub:"Conto sospeso",scam:1,subj:"Conto sospeso: verifica i tuoi dati",
+  from:[S("poste.italiane.assistenza@gmail.com","Mittente")],
+  body:[S("Gentile cliente,"),S("abbiamo rilevato un'attività insolita sul suo conto."),S("Il conto verrà sospeso entro 24 ore","Urgenza"),S("se non conferma la sua identità."),S("Accedi e verifica i dati","Link","http://poste-verifica.top/login?id=8812")],
+  ok:"Hai fatto bene: è il phishing classico delle Poste. Anche «Gentile cliente» senza il tuo nome è un campanello d'allarme.",
+  why:{Mittente:"Un indirizzo @gmail.com non è delle Poste. Le comunicazioni ufficiali arrivano da indirizzi con dominio <b>@posteitaliane.it</b>.",Urgenza:"«Entro 24 ore» serve a farti agire senza controllare.",Link:"Questo link porta a <i>poste-verifica.top</i>. Il sito vero è <b>www.poste.it</b>."},
+  vero:"🌐 <b>Sito vero:</b> www.poste.it (o l'app BancoPosta/Postepay), che apri tu da solo, mai da un link ricevuto.<br>✉ <b>Mail vere:</b> arrivano da indirizzi <b>@posteitaliane.it</b>. Poste Italiane non chiede dati per email o SMS: le comunicazioni ufficiali stanno nella Bacheca, l'area riservata di poste.it."},
+ {ico:"✉",name:"Poste Italiane",sub:"Estratto conto",scam:0,subj:"Il tuo estratto conto di ottobre",
+  from:[S("comunicazioni@posteitaliane.it")],
+  body:[S("Buongiorno,"),S("il tuo estratto conto di ottobre è disponibile."),S("Puoi consultarlo nella tua Bacheca, nell'area riservata di poste.it."),S("Non ti chiederemo mai password o codici via email.")],
+  real:"Dominio ufficiale (@posteitaliane.it), nessuna fretta e nessun link: ti rimanda alla Bacheca, che apri tu da poste.it. Avvisa anche di non comunicare mai credenziali. Un messaggio vero può parlare di un conto: conta <i>come</i> lo fa."},
+ {ico:"✉",name:"Agenzia delle Entrate",sub:"Rimborso fiscale",scam:1,subj:"Rimborso fiscale disponibile",
+  from:[S("rimborsi@agenziaentrate-gov.it.verifica-dati.net","Mittente")],
+  body:[S("Gentile contribuente,"),S("risulta a suo favore un rimborso di 342,18 €."),S("Per riceverlo inserisca il numero della carta e il codice di sicurezza.","Richiesta"),S("Richiedi il rimborso","Link","https://www.agenziaentrate.gov.it.rimborsi-online.net/ritira")],
+  ok:"Hai fatto bene: questa era fatta bene, con un indirizzo che sembra ufficiale. L'esca è il denaro, la più usata in assoluto.",
+  why:{Mittente:"Leggi l'indirizzo da destra: il dominio vero è <i>verifica-dati.net</i>. Le mail ufficiali arrivano da <b>@agenziaentrate.it</b> (o <b>@agenziaentrate-riscossione.it</b> per la Riscossione), e il sito è <b>agenziaentrate.gov.it</b>: «gov.it» deve essere la fine del dominio, non un pezzo in mezzo.",Richiesta:"Per un rimborso non servono il numero della carta né il codice di sicurezza, e non si chiedono mai per email.",Link:"Il dominio reale è <i>rimborsi-online.net</i>. Quello vero sarebbe <b>www.agenziaentrate.gov.it</b>."},
+  vero:"🌐 <b>Sito vero:</b> www.agenziaentrate.gov.it: i servizi si usano dall'area riservata con SPID, CIE o CNS, digitando tu l'indirizzo.<br>✉ <b>Mail vere:</b> arrivano da <b>@agenziaentrate.it</b> o <b>@agenziaentrate-riscossione.it</b>. L'Agenzia non chiede mai PIN, password o dati della carta per email o SMS."},
+ {ico:"✉",name:"INPS",sub:"Area personale",scam:1,subj:"INPS: verifica la tua area personale",
+  from:[S("comunicazioni@inps-servizi.com","Mittente")],
+  body:[S("Gentile utente,"),S("la sua area personale richiede un aggiornamento."),S("Reinserisca le credenziali SPID entro 48 ore","Richiesta"),S("per non perdere l'accesso alle prestazioni."),S("Accedi all'area personale","Link","https://inps-areapersonale.net/login")],
+  ok:"Hai fatto bene: finte mail dell'INPS circolano spesso, e puntano alle credenziali SPID, che aprono molti servizi.",
+  why:{Mittente:"<i>inps-servizi.com</i> non è dell'INPS. Le mail ufficiali terminano con <b>@inps.it</b> e il sito vero è <b>www.inps.it</b>.",Richiesta:"Nessun ente ti chiede per email di reinserire le credenziali SPID: l'accesso si fa solo dal sito ufficiale.",Link:"Il link porta a <i>inps-areapersonale.net</i>. Quello vero è <b>www.inps.it</b>."},
+  vero:"🌐 <b>Sito vero:</b> www.inps.it, con accesso tramite SPID, CIE o CNS, aperto da te e mai da un link ricevuto.<br>✉ <b>Mail vere:</b> arrivano da indirizzi <b>@inps.it</b>. L'INPS dichiara di non inviare email o SMS con link da cliccare per accedere ai servizi."},
+ {ico:"💬",name:"BRT",sub:"Consegna pacco",sms:1,scam:1,
+  from:[S("BRT")],
+  body:[S("BRT: il suo pacco non è stato consegnato."),S("Riprogrammi la consegna entro 24 ore","Urgenza"),S("e paghi 0,99 € di spese:","Richiesta"),S("brt-ritiro-pacco.info/consegna","Link","https://brt-ritiro-pacco.info/consegna")],
+  ok:"Hai fatto bene: è lo smishing del finto pacco, tra le truffe più diffuse. I pochi centesimi servono a rubarti i dati della carta.",
+  why:{Urgenza:"«Entro 24 ore» è la solita leva per non farti controllare.",Richiesta:"Ti chiede di pagare con la carta tramite un link ricevuto per SMS: così rubano i dati. Una cifra bassa abbassa la guardia.",Link:"Il dominio utilizzato è <i>brt-ritiro-pacco.info</i>. Il sito reale del corriere è <b>www.brt.it</b>."},
+  vero:"🌐 <b>Sito vero:</b> www.brt.it (o l'app ufficiale): per controllare una spedizione vai tu e inserisci il codice di tracking."},
+ {ico:"💬",name:"PosteInfo",sub:"Codice di verifica",sms:1,scam:0,
+  from:[S("PosteInfo")],
+  body:[S("Codice di verifica: 482913."),S("Scade tra 5 minuti. Non comunicarlo a nessuno.")],
+  real:"È il codice che hai richiesto tu per accedere a un servizio, e il messaggio stesso ti dice di non comunicarlo. Nessun link, nessuna richiesta. Attenzione però: è proprio il codice che i truffatori cercano di farsi dare."},
+ {ico:"💬",name:"INTESA",sub:"Accesso non autorizzato",sms:1,scam:1,
+  from:[S("INTESA")],
+  body:[S("INTESA SANPAOLO: rilevato accesso non autorizzato al suo conto."),S("Il conto verrà bloccato entro 2 ore","Urgenza"),S("se non conferma i dati:"),S("intesasanpaolo-sicurezza.top/verifica","Link","http://intesasanpaolo-sicurezza.top/verifica")],
+  ok:"Hai fatto bene: questo SMS è difficile da smascherare dal mittente, perché il nome di un SMS si può falsificare e può comparire nella stessa conversazione dei messaggi veri della banca.",
+  why:{Urgenza:"«Entro 2 ore» e la minaccia di blocco servono a metterti paura.",Link:"Il dominio reale è <i>intesasanpaolo-sicurezza.top</i>. Il sito della banca è <b>intesasanpaolo.com</b>."},
+  vero:"🌐 <b>Sito vero:</b> www.intesasanpaolo.com (o l'app della banca), aperto da te. La banca non ti chiede di inserire dati da un link ricevuto per SMS."}
+];
+let cur=0,flags=new Set(),done=M.map(()=>false),fbs=M.map(()=>"");
+
+function list(){$("list").innerHTML=M.map((m,i)=>`<button class="it ${i==cur?"on ":""}${done[i]?"ok":"new"}" data-i="${i}"><span>${m.ico}</span><b>${m.name}</b><i>${done[i]?"✔":""}</i><small>${m.sub}</small></button>`).join("");
+ const n=done.filter(Boolean).length;$("pr").style.width=(n/M.length*100)+"%";$("goq").classList.toggle("hidden",n<M.length)}
+function reader(){const m=M[cur],all=[...m.from,...m.body];
+ const sp=a=>a.map(s=>{const i=all.indexOf(s);return `<span class="seg${flags.has(i)?" f":""}${s.u?" lk":""}" data-i="${i}">${s.t}</span>`}).join(" ");
+ $("rd").innerHTML=(m.sms?`<div class="sms"><div class="mh">Da: ${sp(m.from)}</div><p>${sp(m.body)}</p></div>`:`<div class="mail"><div class="mh">Da: ${sp(m.from)}</div><div class="subj">Oggetto: ${m.subj}</div><p>${sp(m.body)}</p></div>`)
+ +`<div class="sb" id="sb">Passa il mouse (o tocca) un link per vedere dove porta</div>`
+ +(done[cur]?"":`<div class="row"><button id="vs">🚩 È una truffa</button><button class="ghost" id="vk">✔ È sicuro</button></div>`)
+ +`<div id="fb">${fbs[cur]}</div>`;
+ if(!done[cur]){$("vs").onclick=()=>ev(1);$("vk").onclick=()=>ev(0)}}
+function ev(v){const m=M[cur],all=[...m.from,...m.body],clues=[...new Set(all.map(s=>s.c).filter(Boolean))],fl=[...flags].map(i=>all[i]);
+ let ok=false,t="";
+ if(m.scam){
+  if(!v)t="Troppo fiducioso: questo messaggio è una trappola. Rileggilo cercando mittente, fretta, link e richieste strane.";
+  else{const got=new Set(fl.map(s=>s.c)),miss=clues.filter(c=>!got.has(c)),extra=fl.filter(s=>!s.c).length;
+   if(got.size<2)t="Giusto, è una truffa! Ma hai segnalato "+got.size+" segnal"+(got.size==1?"e":"i")+" su "+clues.length+": ne servono almeno 2. Evidenzia le parti sospette (mittente, fretta, link, richieste strane) e riprova.";
+   else{ok=true;t=(miss.length?"✔ Bene, ne hai trovati "+got.size+" su "+clues.length+" (ti era sfuggito: "+miss.join(", ")+").<br><br>":"✔ Esatto, li hai trovati tutti.<br><br>")+"<b>"+m.ok+"</b><br><br>"+clues.map(c=>"• <b>"+c+":</b> "+m.why[c]).join("<br>")+(m.vero?"<br><br>✅ <b>Quello vero:</b> "+m.vero:"")+(extra?"<br><br><i>Nota: hai evidenziato anche "+extra+" parte/i normali, attento ai falsi allarmi.</i>":"")}}
+ }else{
+  if(v)t="Falso allarme! "+m.real;
+  else{ok=true;t="✔ Giusto, è sicuro. "+m.real}}
+ fbs[cur]=`<div class="fb ${ok?"g":"b"}">${t}</div>`;
+ if(ok){done[cur]=true;fbs[cur]+=done.includes(false)?'<div class="row"><button id="nx">Prossimo messaggio →</button></div>':'<div class="row"><button id="nx">Vai alla prossima prova →</button></div>'}
+ list();reader();const f=$("fb");if(f)f.scrollIntoView({behavior:"smooth",block:"center"})}
+
+$("list").onclick=e=>{const b=e.target.closest(".it");if(!b)return;cur=+b.dataset.i;flags=new Set();list();reader()};
+$("rd").onclick=e=>{if(e.target.id==="nx"){if(!done.includes(false)){toQ2();return}cur=done.indexOf(false);flags=new Set();list();reader();return}const s=e.target.closest(".seg");if(!s||done[cur])return;const i=+s.dataset.i;flags.has(i)?flags.delete(i):flags.add(i);s.classList.toggle("f");
+ const x=[...M[cur].from,...M[cur].body][i];if(x.u)$("sb").textContent="Il link porta a: "+x.u};
+$("rd").onmouseover=e=>{const s=e.target.closest(".seg");if(!s)return;const x=[...M[cur].from,...M[cur].body][+s.dataset.i];if(x.u)$("sb").textContent="Il link porta a: "+x.u};
+
+const lines=["[POSTA] 7 messaggi non letti sul computer e sul telefono di Elia.","[SISTEMA] Dopo il suo allontanamento qualcuno ha iniziato a scrivere a suo nome.","[SISTEMA] Alcuni messaggi sono veri. Altri sono trappole per rubare accessi.","[SISTEMA] Ogni errore qui può costare l'archivio. Controlla bene."];
+let k=0;(function nxt(){if(k<lines.length){const p=document.createElement("p");p.textContent=lines[k++];$("chat").appendChild(p);setTimeout(nxt,1000)}else $("start").classList.remove("hidden")})();
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("game").classList.remove("hidden");list();reader()};
+function toQ2(){di=-1;showDeck();$("game").classList.add("hidden");$("cat").classList.remove("hidden");scrollTo(0,0)}$("cont").onclick=toQ2;
+
+const C=[
+ {n:"Phishing",sc:"Ricevi una mail che sembra della tua banca: «aggiorna i tuoi dati», con un link a un sito identico a quello vero.",d:"Il <b>phishing</b> (da «fishing», pescare) è un messaggio inviato a moltissime persone che imita un ente o un'azienda per rubare credenziali o dati.",ex:"È la truffa informatica più diffusa: il CERT-AgID pubblica spesso avvisi su campagne che imitano Poste, INPS, banche e corrieri.",df:"Controlla dominio e link e non inserire mai credenziali da un link ricevuto."},
+ {n:"Smishing",sc:"Un SMS dice che il tuo pacco è bloccato e ti chiede di pagare 0,99 € su un link.",d:"Lo <b>smishing</b> è il phishing via SMS (o app di messaggi): messaggi brevi, spesso con link abbreviati o falsi.",ex:"Il finto pacco e la finta banca sono i casi più frequenti; il nome del mittente si può falsificare e comparire nella stessa chat dei messaggi veri.",df:"Non toccare link negli SMS: vai tu sul sito o sull'app ufficiale."},
+ {n:"Vishing",sc:"Una voce al telefono si presenta come «antifrode della banca» e ti chiede il codice appena ricevuto per SMS.",d:"Il <b>vishing</b> (voice phishing) è una truffa a voce al telefono. Il numero che compare può essere falsificato (spoofing).",ex:"Il finto operatore antifrode che ti fa «mettere in sicurezza» il conto è un caso su cui la Polizia Postale ha diffuso più volte avvisi.",df:"Riattacca e richiama tu la banca al numero ufficiale. I codici non si dettano a nessuno."},
+ {n:"Spear phishing",sc:"Una mail ti chiama per nome, cita il tuo progetto e il tuo responsabile, e ti chiede di aprire un allegato.",d:"Lo <b>spear phishing</b> (phishing con l'arpione) è mirato: il truffatore studia prima la vittima, tra social e siti, e scrive un messaggio su misura.",ex:"Nel 2016 un finto avviso di sicurezza di Google contribuì alla violazione dell'account di John Podesta, capo della campagna di Hillary Clinton: è un caso molto noto.",df:"Più un messaggio sembra fatto apposta per te, più va verificato con un altro canale."},
+ {n:"Quishing",sc:"In un parcheggio trovi un QR code incollato sopra quello originale per pagare la sosta.",d:"Il <b>quishing</b> è phishing con QR code: dietro il quadratino c'è un indirizzo falso che non puoi leggere a occhio.",ex:"QR code falsi su parcometri e in email sono stati segnalati in diversi Paesi.",df:"Controlla l'indirizzo che compare prima di aprirlo e diffida dei QR incollati sopra altri."},
+ {n:"Truffa del CEO (BEC)",sc:"Un'email che sembra del direttore ti chiede un bonifico urgente e riservato su un nuovo IBAN.",d:"La <b>truffa del CEO</b> (Business Email Compromise) imita un dirigente o un fornitore per far eseguire un pagamento. Colpisce aziende e uffici amministrativi.",ex:"Tra il 2013 e il 2015 un truffatore, fingendosi un fornitore, fece pagare a grandi aziende tra cui Google e Facebook oltre 100 milioni di dollari con fatture false.",df:"Ogni cambio di IBAN o bonifico urgente va confermato con una telefonata al numero già noto."},
+ {n:"Falso familiare",sc:"Su WhatsApp un numero nuovo scrive: «Ciao mamma, ho cambiato telefono, puoi farmi un bonifico urgente?».",d:"La truffa del <b>falso familiare</b> sfrutta il social engineering: ci si finge un parente su un numero nuovo, puntando su fiducia ed emozione, non sulla tecnologia.",ex:"È una truffa diffusa in tutta Europa e segnalata anche in Italia.",df:"Chiama il parente sul numero che hai già e non fare bonifici prima di averlo sentito."}
+];
+const K={"Phishing":"è un'email inviata a tanti, con link o allegato e un tono di fretta.","Smishing":"arriva per SMS o messaggio, con un link breve o strano.","Vishing":"è una telefonata: chi chiama ha fretta e chiede codici o operazioni.","Spear phishing":"è un'email scritta apposta per te: usa il tuo nome, il tuo ruolo, i tuoi progetti reali.","Quishing":"c'è un QR code al posto del link.","Truffa del CEO (BEC)":"un finto capo o fornitore chiede un bonifico urgente e riservato, spesso su un nuovo IBAN.","Falso familiare":"un numero nuovo dice di essere un parente o un amico e chiede soldi."};
+let di=-1;
+function showDeck(){
+ if(di<0){$("cs").innerHTML='<h2>Prima di giocare: il manuale</h2><div class="fb">Ogni truffa si riconosce rispondendo a tre domande:<br>1) <b>Come arriva?</b> (email, SMS, telefonata, QR code, chat)<br>2) <b>Chi finge di essere?</b> (un ente, un capo, un parente)<br>3) <b>Quanto è mirata?</b> (inviata a tutti, o scritta apposta per te)<br><br>Ora conosci le 7 truffe più note, una alla volta.</div><div class="row"><button id="dn">Inizia →</button></div>';
+  $("dn").onclick=()=>{di=0;showDeck()};return}
+ const c=C[di];
+ $("cs").innerHTML=`<h2>Truffa ${di+1}/${C.length}: ${c.n}</h2><div class="fb g">${c.d}<br><br>🔎 <b>Come si riconosce:</b> ${K[c.n]}<br><br>📰 <b>Caso noto:</b> ${c.ex}<br><br>🛡 <b>Come difendersi:</b> ${c.df}</div><div class="row"><button id="dn">${di<C.length-1?"Prossima truffa →":"Ho capito, mettimi alla prova →"}</button></div>`;
+ $("dn").onclick=()=>{if(di<C.length-1){di++;showDeck()}else{ci=0;showC()}}}
+let ci=0;
+function showC(){const c=C[ci],ids=C.map((_,i)=>i).filter(i=>i!==ci).sort(()=>Math.random()-.5).slice(0,3).concat(ci).sort(()=>Math.random()-.5);
+ $("cs").innerHTML=`<h2>Verifica · caso ${ci+1}/${C.length}: che truffa è?</h2><div class="fb">${c.sc}</div>`+ids.map(i=>`<label class="op" data-i="${i}">${C[i].n}</label>`).join("")+'<div id="fc"></div>';
+ $("cs").onclick=e=>{const l=e.target.closest(".op");if(!l||l.dataset.d||$("gc"))return;const k=+l.dataset.i;l.dataset.d=1;
+  if(k===ci){l.classList.add("right");$("fc").innerHTML=`<div class="fb g">✔ Giusto. ${c.d}<br><br>📰 <b>Caso noto:</b> ${c.ex}<br><br>🛡 <b>Come difendersi:</b> ${c.df}</div><div class="row"><button id="gc">${ci<C.length-1?"Prossimo caso →":"Avanti →"}</button></div>`;
+   $("gc").onclick=()=>{if(ci<C.length-1){ci++;showC()}else{$("cat").classList.add("hidden");showQ();$("q2").classList.remove("hidden");scrollTo(0,0)}}}
+  else{l.classList.add("wrong");$("fc").innerHTML=`<div class="fb b">✖ Non è «${C[k].n}». ${C[k].d} Ricorda come si riconosce: «${C[k].n}» ${K[C[k].n]} Rileggi il caso e riprova.</div>`}}}
+const Q=[
+ {h:"Scenario 1 · Hai già cliccato",p:"Hai aperto il link «poste-verifica.top» e hai inserito email e password nella pagina che si è aperta. Dopo un minuto capisci che era falsa. Qual è la <b>prima</b> cosa da fare?",o:[
+  {t:"Chiudo la pagina e aspetto: se non succede niente, non è successo niente.",e:"I dati sono già arrivati ai truffatori, che li provano subito. Aspettare dà loro tempo."},
+  {t:"Cambio subito la password di quell'account, da un dispositivo sicuro, e anche ovunque l'avevo riutilizzata.",ok:1,e:"È la mossa che rende inutile la password rubata. I truffatori provano la stessa password su altri servizi: per questo non si riutilizza mai (lo vedrai nel prossimo livello)."},
+  {t:"Rispondo alla mail per dire che ho scoperto la truffa.",e:"Rispondere conferma che il tuo indirizzo è attivo e porta altre truffe."},
+  {t:"Disinstallo il browser.",e:"Il problema non è nel browser ma nella password che hai consegnato."}]},
+ {h:"Scenario 2 · Il finto tecnico",p:"Squilla il telefono: «Sono dell'assistenza della sua banca, hanno tentato un accesso dal suo conto. Per bloccarlo mi legga il codice che le è appena arrivato per SMS». Cosa fai?",o:[
+  {t:"Leggo il codice: se è la banca, mi sta aiutando.",e:"Quel codice autorizza un'operazione, spesso un bonifico. La banca vera non lo chiede mai a voce: è il trucco del vishing."},
+  {t:"Chiedo il nome del tecnico e poi leggo il codice.",e:"Nome e ruolo sono facili da inventare. Il codice non si comunica mai, qualunque cosa dica chi chiama."},
+  {t:"Riattacco e chiamo io la banca al numero ufficiale (sito o carta).",ok:1,e:"Sei tu a scegliere il canale. Anche se il numero che chiama sembra quello della banca (si può falsificare), richiamando tu sei sicuro di parlare con quella vera."},
+  {t:"Gli dico di richiamare più tardi.",e:"Meglio di niente, ma non basta: richiamerà con più pressione. Conviene riattaccare e verificare tu."}]},
+ {h:"Scenario 3 · Il collega che ha cambiato numero",p:"Su WhatsApp ti scrive un numero sconosciuto, con la foto di un tuo collega: «Ciao, ho cambiato numero. Mi fai un favore urgente? Ti spiego dopo». Cosa fai?",o:[
+  {t:"Faccio il favore: ha la sua foto, sarà lui.",e:"Una foto si copia da un profilo pubblico in un secondo. Non è una prova."},
+  {t:"Gli chiedo di che favore si tratta e continuo a chattare.",e:"Continuare la chat non verifica nulla e dà al truffatore il tempo di costruire la storia."},
+  {t:"Chiamo il collega sul numero che ho già salvato, o lo cerco su un altro canale.",ok:1,e:"La verifica su un canale diverso e già noto è la difesa più forte contro chi si finge un conoscente."},
+  {t:"Blocco il numero e non dico niente a nessuno.",e:"Bloccare è giusto ma non basta: va avvisato il collega, perché qualcuno usa il suo nome, e il caso va segnalato alla Polizia Postale."}]}
+];
+let qi=0;
+function showQ(){const q=Q[qi],o=[...q.o].sort(()=>Math.random()-.5);
+ $("qs").innerHTML=`<h2>${q.h} <small class="dim">(${qi+1}/${Q.length})</small></h2><p>${q.p}</p>`+o.map((x,i)=>`<label class="op" data-i="${i}">${x.t}</label>`).join("")+'<div id="fq"></div>';
+ $("qs").onclick=e=>{const l=e.target.closest(".op");if(!l||l.dataset.d||$("go2"))return;const x=o[+l.dataset.i];l.dataset.d=1;
+  l.classList.add(x.ok?"right":"wrong");
+  $("fq").innerHTML=`<div class="fb ${x.ok?"g":"b"}">${x.ok?"✔ Giusto. ":"✖ Non è questa. "}${x.e}</div>`+(x.ok?`<div class="row"><button id="go2">${qi<Q.length-1?"Prossima situazione →":"Concludi il livello →"}</button></div>`:"");
+  if(x.ok)$("go2").onclick=()=>{if(qi<Q.length-1){qi++;showQ()}else{$("q2").classList.add("hidden");$("lesson").classList.remove("hidden");scrollTo(0,0)}}}}
+if(FORM_URL.startsWith("http"))$("lock").href=FORM_URL;else{$("warn").classList.remove("hidden");$("lock").onclick=e=>e.preventDefault()}
+</script>
+</body>
+</html>
